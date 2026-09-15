@@ -1,5 +1,6 @@
 import os
 import subprocess
+from funcionesMiniCalculadora import suma, resta, mult, div, mod, poW
 """Calculadora"""
 
 # Primer ejercicio:
@@ -7,15 +8,17 @@ print("\n--Programa que suma dos numeros--")
 x1 = float(input("Digite un numero: "))
 x2 = float(input("Digite un numero: "))
 x3 = x1 + x2
+
 print(f"La suma de los dos numero es: {x3:.2f}")
 input("Presione Enter para continuar....")
 subprocess.run('cls' if os.name == 'nt' else 'clear', shell=True)
 
 print("\n--------------------------------------\n")
 
+process = True
 # Segunda parte del ejercicio:
 print("--Calculadora--")
-while True:
+while process:
     print("Observa que operaciones estan disponibles y elige una para realizarla...."
                 "\n(1) Sumar dos numeros" \
                 "\n(2) Restar dos numeros" \
@@ -33,32 +36,26 @@ while True:
     subprocess.run('cls' if os.name == 'nt' else 'clear', shell=True)
 
 # Verificar si se ingresaron valores validos o no...
-    while True:
+    while process:
         try:
             n1 = float(input("\n- Digite el primer numero: "))
             n2 = float(input("- Digite el segundo numero: "))
-            break
+            process = False
         except ValueError:
             print("Error al ingresar uno o mas valores, favor de intentar nuevamente....")
 
-    result=0
-
+    process = True
     match option:
         case 1:
-            result = n1 + n2
-            print(f"El resultado de la suma es: {result:.2f}")
+            print(f"El resultado de la suma es: ",suma(n1,n2))
         case 2:
-            result = n1 - n2
-            print(f"El resultado de la resta es: {result:.2f}")
+            print(f"El resultado de la resta es: ",resta(n1,n2))
         case 3:
-            result = n1 * n2
-            print(f"El resultado de la multiplicacion es: {result:.2f}")
+            print(f"El resultado de la multiplicacion es: ",mult(n1,n2))
         case 4:
-            result = n1 / n2
-            print(f"El resultado de la division es: {result:.2f}")
+            print(f"El resultado de la division es: ",div(n1,n2))
         case 5:
-            result = n1 % n2
-            print(f"El residuo de la operacion es: {result:.2f}")
+            print(f"El residuo de la operacion es: ",mod(n1,n2))
         case _:
             print("opcion incorrecta.....")
 
@@ -69,7 +66,7 @@ while True:
 
     if closeProgram == 2:
         print("Fin del programa....")
-        break
+        process = False
     
     if closeProgram < 1 or closeProgram > 2:
         print("Opción incorrecta, intenta de nuevo.")
